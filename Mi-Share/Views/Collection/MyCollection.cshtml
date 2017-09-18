@@ -8,6 +8,11 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title">Items</h3>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+                        Add New
+                    </button>
+                </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -29,8 +34,8 @@
                             <td>Fiction</td>
                             <td><span class="label label-success">Available</span></td>
                             <td>
-                                <button type="button" class="btn btn-block btn-primary">Edit</button>
-                                <button type="button" class="btn btn-block btn-danger">Delete</button>
+                                <button type="button" class="btn btn-sm  btn-primary">Edit</button>
+                                <button type="button" class="btn btn-sm  btn-danger">Delete</button>
                             </td>
                         </tr>
                         <tr>
@@ -38,13 +43,67 @@
                             <td>Purpose Driven Life</td>
                             <td>Motivational</td>
                             <td><span class="label label-danger">Borrowed</span></td>
+                            <td>
+                                <button type="button" class="btn btn-sm btn-primary">Edit</button>
+                                <button type="button" class="btn btn-sm btn-danger">Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                     
                 </table>
             </div>
+
+            
+                <div class="modal" id="modal-default">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <h4 class="modal-title">New Item</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="box box-primary">
+                                    
+                                    <!-- form start -->
+                                    <form role="form">
+                                        <div class="box-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Media Type</label>
+                                                <select class="form-control">
+                                                    <option>Movie</option>
+                                                    
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Item Name</label>
+                                                <input type="text" class="form-control" required id="exampleInputPassword1" placeholder="Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputFile">Item Description</label>
+                                                <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                               
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+           
             <!-- /.box-body -->
         </div>
     </div>
 </div>
+
+
 

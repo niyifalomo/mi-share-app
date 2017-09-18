@@ -18,5 +18,12 @@ namespace Mi_Share.Controllers
         {
             return View("MyCollection");
         }
+
+
+        public ActionResult CreateItem()
+        {
+
+            return View();
+        }
     }
 }

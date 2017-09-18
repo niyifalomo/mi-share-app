@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "My Collection";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Items</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered datatable table-striped">
+                    <thead>
+                        <tr>
+                            <th>Media Type</th>
+                            <th>Item Name</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                        <tr>
+                            <td>Movie</td>
+                            <td>Wonder Man</td>
+                            <td>Fiction</td>
+                            <td><span class="label label-success">Available</span></td>
+                            <td>
+                                <button type="button" class="btn btn-block btn-primary">Edit</button>
+                                <button type="button" class="btn btn-block btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Book</td>
+                            <td>Purpose Driven Life</td>
+                            <td>Motivational</td>
+                            <td><span class="label label-danger">Borrowed</span></td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+

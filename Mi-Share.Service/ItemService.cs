@@ -13,6 +13,8 @@ namespace Mi_Share.Service
     {
         bool CreateItem(Item item);
         bool UpdateItem(Item item);
+
+        bool DeleteItem(Item item);
         IEnumerable<Item> GetItems();
 
         Item GetItemByID(int id);
@@ -44,6 +46,12 @@ namespace Mi_Share.Service
         {
             _itemRepository.Update(item);
 
+            return SaveItem() > 0 ? true : false;
+        }
+
+        public bool DeleteItem(Item item)
+        {
+            _itemRepository.Delete(item);
             return SaveItem() > 0 ? true : false;
         }
         public IEnumerable<Item> GetItems()

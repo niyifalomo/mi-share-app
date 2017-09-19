@@ -77,9 +77,22 @@ namespace Mi_Share.Controllers
             var data = Mapper.Map<ItemViewModel, Item>(viewModel);
 
             _itemService.CreateItem(data);
-            
-            return View();
+
+            return Json("Success");
         }
+
+        [HttpPost]
+        public ActionResult DeleteItem(int id)
+        {
+            var item = _itemService.GetItemByID(id);
+
+
+            string response = _itemService.DeleteItem(item) ? "Success" : "False";
+
+            return Json(response);
+            
+        }
+
 
         [HttpPost]
         public ActionResult UpdateItem(ItemViewModel viewModel)
@@ -104,7 +117,7 @@ namespace Mi_Share.Controllers
 
             _itemService.UpdateItem(initialItem);
 
-            return View();
+            return Json("Success");
         }
     }
 }

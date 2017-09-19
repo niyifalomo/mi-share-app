@@ -8,12 +8,13 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             <h4 class="modal-title">New Item</h4>
+            
         </div>
         <!-- form start -->
-        @using (Ajax.BeginForm("UpdateItem", "Collection", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "ItemList" }))
+        @using (Html.BeginForm("UpdateItem", "Collection", FormMethod.Post, new { id = "EditItemForm", @class = "ItemForm" }))
         {
             <div class="modal-body">
-
+                <div id="statusmessage"></div>
                 <div class="box box-primary">
 
 

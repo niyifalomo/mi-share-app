@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Mi_Share.Model;
+using System.Web.Mvc;
 
 namespace Mi_Share.ViewModels
 {
@@ -25,5 +26,6 @@ namespace Mi_Share.ViewModels
         public virtual User Owner { get; set; }
         public virtual Category Category { get; set; }
         public IEnumerable<Request> Requests { get; set; }
+        public IEnumerable<SelectListItem> Categories { get; set; }
     }
 }

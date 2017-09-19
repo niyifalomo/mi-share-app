@@ -15,8 +15,10 @@ namespace Mi_Share.Mappings
 
             Mapper.Initialize(x =>
             {
-                x.CreateMap<Item, ItemViewModel>();
-                x.CreateMap<ItemViewModel, Item>();
+                x.CreateMap<Item, ItemViewModel>()
+                    .ForMember(c=>c.Categories,option=>option.Ignore());
+                x.CreateMap<ItemViewModel, Item>()
+                    .ForMember(c => c.DateCreated, option => option.Ignore());
 
 
                 x.CreateMap<Category, CategoryViewModel>();

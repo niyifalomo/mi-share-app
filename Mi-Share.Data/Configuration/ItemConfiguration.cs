@@ -17,7 +17,7 @@ namespace Mi_Share.Data.Configuration
             Property(x => x.Description).IsOptional().HasMaxLength(250);
             Property(x => x.Category_ID).IsRequired();
             Property(x => x.Status).IsRequired();
-            Property(s => s.DateCreated).IsOptional();
+            Property(s => s.DateCreated).IsRequired();
             Property(s => s.IsDeleted).IsRequired();
             Property(s => s.Owner_ID).IsRequired();
             Property(s => s.DeletedDate).IsOptional();

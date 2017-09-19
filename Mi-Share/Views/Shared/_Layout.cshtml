@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Mi-Share |@ViewBag.Title</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="~/Content/Template/plugins/daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="~/Content/Template/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="~/Content/Template/plugins/pnotify/dist/pnotify.css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -399,7 +400,9 @@
              immediately after the control sidebar -->
         <div class="control-sidebar-bg"></div>
     </div>
+    
     <!-- ./wrapper -->
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
     <!-- jQuery 2.2.3 -->
     <script src="~/Content/Template/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -436,14 +439,21 @@
     <script src="~/Content/Template/plugins/fastclick/fastclick.js"></script>
     <!-- AdminLTE App -->
     <script src="~/Content/Template/dist/js/app.min.js"></script>
+    <!-- PNotify-->
+    <script src="~/Content/Template/plugins/pnotify/dist/pnotify.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/Content/Template/dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Content/Template/dist/js/demo.js"></script>
-    <script src="~/Content/custom.js"></script>
+    <script src="~/Content/custom.js"></script>  
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
+   
+   
     @*@Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)*@
+
+
 </body>
 </html>
 

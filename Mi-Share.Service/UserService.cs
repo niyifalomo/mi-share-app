@@ -13,6 +13,8 @@ namespace Mi_Share.Service
         bool CreateUser(User user);
         User GetUserByCredentials(string username, string password);
 
+        User GetUserByID(int id);
+
     }
     public class UserService : IUserService
     {
@@ -37,6 +39,12 @@ namespace Mi_Share.Service
         {
             var user = _userRepository.Get(x => x.UserName.ToLower() == username.ToLower() && x.Password == password);
 
+            return user;
+        }
+
+        public User GetUserByID(int id)
+        {
+            var user = _userRepository.GetById(id);
             return user;
         }
 

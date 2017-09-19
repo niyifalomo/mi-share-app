@@ -27,6 +27,10 @@ namespace Mi_Share.Model
         public virtual Category Category { get; set; }
         public IList<Request> Requests { get; set; }
 
+        public Item()
+        {
+            DateCreated = DateTime.Now;
+        }
     }
 
     public enum ItemStatus {

@@ -1,4 +1,5 @@
-﻿
+﻿@model Mi_Share.ViewModels.ItemViewModel
+
 @{
     ViewBag.Title = "My Collection";
 }
@@ -14,46 +15,23 @@
                     </button>
                 </div>
             </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <table class="table table-bordered datatable table-striped">
-                    <thead>
-                        <tr>
-                            <th>Media Type</th>
-                            <th>Item Name</th>
-                            <th>Description</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       
-                        <tr>
-                            <td>Movie</td>
-                            <td>Wonder Man</td>
-                            <td>Fiction</td>
-                            <td><span class="label label-success">Available</span></td>
-                            <td>
-                                <button type="button" class="btn btn-sm  btn-primary">Edit</button>
-                                <button type="button" class="btn btn-sm  btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Book</td>
-                            <td>Purpose Driven Life</td>
-                            <td>Motivational</td>
-                            <td><span class="label label-danger">Borrowed</span></td>
-                            <td>
-                                <button type="button" class="btn btn-sm btn-primary">Edit</button>
-                                <button type="button" class="btn btn-sm btn-danger">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                    
-                </table>
+
+            <div class="box-body" id="ItemList" data-url="@Url.Action("ItemList")">
+
+                @{
+                    Html.RenderAction("ItemList", "Collection");
+                    // Html.RenderPartial("ItemList");
+                }
+                <!-- /.box-header -->
+
             </div>
 
-            
+            <div id="EditForm" class="modal">
+                
+            </div>
+
+
+
                 <div class="modal" id="modal-default">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -63,47 +41,54 @@
                                 </button>
                                 <h4 class="modal-title">New Item</h4>
                             </div>
-                            <div class="modal-body">
-                                <div class="box box-primary">
-                                    
-                                    <!-- form start -->
-                                    <form role="form">
+                            <!-- form start -->
+                            @using (Html.BeginForm("CreateItem", "Collection",FormMethod.Post, new { id= "AddItemForm", @class="ItemForm"}))
+                            {
+                                <div class="modal-body">
+                                    <div id="statusmessage"></div>
+                                    <div class="box box-primary">
+
+
                                         <div class="box-body">
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Media Type</label>
-                                                <select class="form-control">
-                                                    <option>Movie</option>
-                                                    
-                                                </select>
+                                                @Html.DropDownListFor(model => model.Category.ID, Model.Categories.OrderBy(x => x.Text), new { @class = "form-control" })
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1">Item Name</label>
-                                                <input type="text" class="form-control" required id="exampleInputPassword1" placeholder="Name">
+                                                <label for="item_name">Item Name</label>
+                                                @Html.EditorFor(model=>model.Name, new { htmlAttributes = new { @class = "form-control required",@required ="required" } })
+
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Item Description</label>
-                                                <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                               
+                                                @Html.TextAreaFor(model=>model.Description,new { @class = "form-control"})
+
                                             </div>
                                         </div>
-                                    </form>
+
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save</button>
-                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                                    <button type="submit"  class="btn btn-primary">Save</button>
+                                </div>
+                            }
                         </div>
                         <!-- /.modal-content -->
                     </div>
                     <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
-           
-            <!-- /.box-body -->
-        </div>
+                <!-- /.box-body -->
+            </div>
     </div>
 </div>
-
-
+<script>
+    //var originalModal = $('#modal-default').clone();
+    //$(document).on('#modal-default', 'hidden.bs.modal', function () {
+    //    $('#modal-default').remove();
+    //    var myClone = originalModal.clone();
+    //    $('body').append(myClone);
+    //});
+</script>
 

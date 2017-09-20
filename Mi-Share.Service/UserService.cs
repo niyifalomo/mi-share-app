@@ -13,17 +13,23 @@ namespace Mi_Share.Service
         bool CreateUser(User user);
         User GetUserByCredentials(string username, string password);
 
+        IEnumerable<User> GetUsers();
+
+        IEnumerable<UsersCollections> GetCollectionsList(int currentUserID);
+
         User GetUserByID(int id);
 
     }
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly ICollectionAccessRepository _collectionAccessRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public UserService(IUserRepository userRepository,IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository,IUnitOfWork unitOfWork, ICollectionAccessRepository collectionAccessRepository)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
+            _collectionAccessRepository = collectionAccessRepository;
         }
 
         public bool CreateUser(User user)
@@ -47,6 +53,43 @@ namespace Mi_Share.Service
             var user = _userRepository.GetById(id);
             return user;
         }
+
+        public IEnumerable<User> GetUsers()
+        {
+            var users = _userRepository.GetAll();
+            return users;
+        }
+
+        public IEnumerable<UsersCollections> GetCollectionsList(int currentUserID)
+        {
+            var users = _userRepository.GetAll()
+               .GroupJoin(
+                   _collectionAccessRepository.GetMany(x => x.Requester_ID == currentUserID && x.Status == CollectionAccessStatus.Granted),
+                   i => i.ID,
+                   p => p.Requester_ID,
+                   (i, g) =>
+                       new
+                       {
+                           i = i,
+                           g = g
+                       }
+               )
+               .SelectMany(
+                   temp => temp.g.DefaultIfEmpty(),
+                   (temp, p) =>
+                       new UsersCollections
+                       {
+                           UserID = temp.i.ID,
+                           FirstName = temp.i.FullName,
+                           LastName = temp.i.LastName,
+                           Access = (p == null) ? CollectionAccessStatus.None : p.Status
+
+                       }
+               );
+            return users;
+        }
+
+
 
         public int SaveUser()
         {

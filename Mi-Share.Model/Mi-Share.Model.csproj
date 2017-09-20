@@ -49,6 +49,7 @@
     <Compile Include="Models\Loan.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UsersCollections.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

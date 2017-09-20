@@ -37,8 +37,30 @@ namespace Mi_Share.Controllers
 
             itemViewModel.Categories = new SelectList(categories, "ID", "Name");
 
+            //return RedirectToAction("OtherCollection");
+
             return View("MyCollection",itemViewModel);
+
+
         }
+
+        public ActionResult OtherCollection()
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+
+            var userID = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
+            int userid = Convert.ToInt32(userID);
+
+            IEnumerable<UsersCollections> users = _userService.GetCollectionsList(userid);
+
+            var userViewModel = Mapper.Map<IEnumerable<UsersCollections>,IEnumerable<UsersCollectionsViewModel>> (users);
+
+            return View(userViewModel);
+
+        }
+
 
         public PartialViewResult ItemList()
         {

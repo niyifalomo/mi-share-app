@@ -41,6 +41,9 @@ namespace Mi_Share.Mappings
                 x.CreateMap<Loan, LoanViewModel>();
                 x.CreateMap<LoanViewModel, Loan>();
 
+                x.CreateMap<UsersCollections, UsersCollectionsViewModel>();
+                x.CreateMap<UsersCollectionsViewModel, UsersCollections>();
+
                 x.CreateMap<CollectionAccess, CollectionAccessViewModel>();
                 x.CreateMap<CollectionAccessViewModel, CollectionAccess>();
 

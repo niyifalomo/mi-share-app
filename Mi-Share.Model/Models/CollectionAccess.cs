@@ -12,7 +12,7 @@ namespace Mi_Share.Model
         public int Owner_ID {get;set;}
         public int Requester_ID { get; set; }
         public DateTime DateRequested { get; set; }
-        public Status Status { get; set; }
+        public CollectionAccessStatus Status { get; set; }
         public DateTime? DateUpdated { get; set; }
         public virtual User Owner { get; set; }
         public virtual User Requester { get; set; }
@@ -23,10 +23,12 @@ namespace Mi_Share.Model
 
     }
 
-    public enum Status {
+    public enum CollectionAccessStatus
+    {
+        None,
         Pending,
         Granted,
-        Denied
+        Denied,
     }
 
 }

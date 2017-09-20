@@ -349,8 +349,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> Loaned Items</a></li>
-                            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Borrowed Items</a></li>
+                            <li><a href="@Url.Action("LoanedItems","Loan")"><i class="fa fa-circle-o"></i> Loaned Items</a></li>
+                            <li><a href="@Url.Action("BorrowedItems", "Loan")"><i class="fa fa-circle-o"></i> Borrowed Items</a></li>
+
                         </ul>
                     </li>
                     <li class="treeview">
@@ -361,8 +362,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> My Requests</a></li>
-                            <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Pending Requests</a></li>
+                            <li><a href="@Url.Action("MyRequests","Request")"><i class="fa fa-circle-o"></i>My Requests</a></li>
+                            <li><a href="@Url.Action("PendingRequests", "Request")"><i class="fa fa-circle-o"></i>Pending Requests</a></li>
+
                         </ul>
                     </li>
                    

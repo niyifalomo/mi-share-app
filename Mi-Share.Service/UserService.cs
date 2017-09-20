@@ -24,12 +24,14 @@ namespace Mi_Share.Service
     {
         private readonly IUserRepository _userRepository;
         private readonly ICollectionAccessRepository _collectionAccessRepository;
+        private readonly IItemRepository _itemRepository;
         private readonly IUnitOfWork _unitOfWork;
-        public UserService(IUserRepository userRepository,IUnitOfWork unitOfWork, ICollectionAccessRepository collectionAccessRepository)
+        public UserService(IUserRepository userRepository,IItemRepository itemRepository,IUnitOfWork unitOfWork, ICollectionAccessRepository collectionAccessRepository)
         {
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
             _collectionAccessRepository = collectionAccessRepository;
+            _itemRepository = itemRepository;
         }
 
         public bool CreateUser(User user)
@@ -62,7 +64,8 @@ namespace Mi_Share.Service
 
         public IEnumerable<UsersCollections> GetCollectionsList(int currentUserID)
         {
-            var users = _userRepository.GetAll()
+            var users = _userRepository.GetMany(x=>x.ID != currentUserID)
+
                .GroupJoin(
                    _collectionAccessRepository.GetMany(x => x.Requester_ID == currentUserID && x.Status == CollectionAccessStatus.Granted),
                    i => i.ID,
@@ -74,19 +77,23 @@ namespace Mi_Share.Service
                            g = g
                        }
                )
+
                .SelectMany(
                    temp => temp.g.DefaultIfEmpty(),
                    (temp, p) =>
                        new UsersCollections
                        {
                            UserID = temp.i.ID,
-                           FirstName = temp.i.FullName,
-                           LastName = temp.i.LastName,
+                           FullName = temp.i.FullName,
+                           ItemCount = _itemRepository.GetMany(x => x.Owner_ID == temp.i.ID).Count(),
                            Access = (p == null) ? CollectionAccessStatus.None : p.Status
 
                        }
                );
             return users;
+
+
+            
         }
 
 

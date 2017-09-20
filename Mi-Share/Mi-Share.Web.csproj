@@ -184,6 +184,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CollectionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoanController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -254,6 +256,10 @@
     <Content Include="Views\Collection\ItemList.cshtml" />
     <Content Include="Views\Collection\EditItem.cshtml" />
     <Content Include="Views\Collection\OthersCollection.cshtml" />
+    <Content Include="Views\Loan\LoanedItems.cshtml" />
+    <Content Include="Views\Loan\BorrowedItems.cshtml" />
+    <Content Include="Views\Request\MyRequests.cshtml" />
+    <Content Include="Views\Request\PendingRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -44,7 +44,7 @@ namespace Mi_Share.Controllers
 
         }
 
-        public ActionResult OtherCollection()
+        public ActionResult OthersCollection()
         {
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
@@ -64,7 +64,8 @@ namespace Mi_Share.Controllers
 
         public PartialViewResult ItemList()
         {
-            IEnumerable<Item> items = _itemService.GetItems().ToList();
+            int userID = GetUserID();
+            IEnumerable<Item> items = _itemService.GetUserItems(userID).ToList();
 
             var viewModelItem = Mapper.Map<IEnumerable<Item>, IEnumerable<ItemViewModel>>(items);
 
@@ -119,17 +120,14 @@ namespace Mi_Share.Controllers
         [HttpPost]
         public ActionResult UpdateItem(ItemViewModel viewModel)
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
 
-            var userID = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
-
-            viewModel.Owner = _userService.GetUserByID(Convert.ToInt32(userID));
-            viewModel.Owner_ID = Convert.ToInt32(userID);
+            int userID = GetUserID();
+            viewModel.Owner = _userService.GetUserByID(userID);
+            viewModel.Owner_ID = userID;
             viewModel.Category = _categoryService.GetCategoryById(viewModel.Category.ID);
             viewModel.Category_ID = viewModel.Category.ID;
             viewModel.Updated_At = DateTime.Now;
-            viewModel.Updated_By = Convert.ToInt32(userID);
+            viewModel.Updated_By = userID;
 
             var initialItem = _itemService.GetItemByID(viewModel.ID);
             initialItem.Category = null;
@@ -142,10 +140,16 @@ namespace Mi_Share.Controllers
             return Json("Success");
         }
 
-        public ActionResult OthersCollection()
+        public int GetUserID()
         {
-            return View();
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+
+            var userID = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+
+            return Convert.ToInt32(userID);
         }
+        
 
 
     }

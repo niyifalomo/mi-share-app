@@ -19,7 +19,7 @@ namespace Mi_Share.Service
 
         Item GetItemByID(int id);
 
-
+        IEnumerable<Item> GetUserItems(int id);
 
 
     }
@@ -64,6 +64,12 @@ namespace Mi_Share.Service
         {
             var item = _itemRepository.GetById(id);
             return item;
+        }
+
+        public IEnumerable<Item> GetUserItems(int id)
+        {
+            var items = _itemRepository.GetMany(x=>x.Owner_ID == id);
+            return items;
         }
 
 

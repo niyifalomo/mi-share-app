@@ -13,6 +13,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>User Name</th>
                             <th>Total Items in Library</th>
                             <th>Request Browsing Access</th>
@@ -22,6 +23,9 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td><div class="pull-left image ">
+    <img src="https://randomuser.me/api/portraits/men/1.jpg" class="img-circle collectionIcon" alt="User Image">
+</div></td>
                                 <td>@item.FullName</td>
                                 <td>@item.ItemCount</td>
                                 @if (item.Access.ToString().ToLower() == "granted")

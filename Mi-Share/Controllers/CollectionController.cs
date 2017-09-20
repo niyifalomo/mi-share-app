@@ -141,5 +141,12 @@ namespace Mi_Share.Controllers
 
             return Json("Success");
         }
+
+        public ActionResult OthersCollection()
+        {
+            return View();
+        }
+
+
     }
 }

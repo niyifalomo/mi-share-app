@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -252,6 +253,7 @@
     <Content Include="Views\Collection\MyCollection.cshtml" />
     <Content Include="Views\Collection\ItemList.cshtml" />
     <Content Include="Views\Collection\EditItem.cshtml" />
+    <Content Include="Views\Collection\OthersCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

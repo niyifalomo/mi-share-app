@@ -1,0 +1,15 @@
+﻿.content-wrapper,html,body {
+   /* min-height:100%!important;*/
+}
+
+.small-box p {
+    font-size: 17px;
+}
+
+.dataTables_filter,.dataTables_paginate {
+    float:right;
+}
+
+.label {
+    font-size:12px;
+}

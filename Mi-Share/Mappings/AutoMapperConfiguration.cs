@@ -45,8 +45,9 @@ namespace Mi_Share.Mappings
                 x.CreateMap<UsersCollectionsViewModel, UsersCollections>();
 
                 x.CreateMap<CollectionAccess, CollectionAccessViewModel>();
-                x.CreateMap<CollectionAccessViewModel, CollectionAccess>();
-
+                x.CreateMap<CollectionAccessViewModel, CollectionAccess>()
+                    .ForMember(c=>c.Status,option=>option.Ignore())
+                    .ForMember(c => c.DateRequested, option => option.Ignore());
             });
         }
     }

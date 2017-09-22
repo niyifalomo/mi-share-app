@@ -62,6 +62,42 @@
 
             }
 
+            $('body').on('click', '.RequestCollection', function (e) {
+
+                var userId = $(this).attr('data-id');
+
+                var button = $(this);
+               
+                var formData = "{userId:'" + userId + "'}";
+
+                $.ajax({
+                    type: "POST",
+                    url: '/Request/RequestAccess',
+                    data: formData,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (data) {
+                        button.text("Pending");
+                        button.removeClass("btn-primary");
+                        button.addClass("btn-warning disabled"); 
+                        new PNotify({
+                            title: 'Success',
+                            text: "Request sent successfully",
+                            type: 'success',
+                            styling: 'bootstrap3'
+                        });
+
+                        
+
+                        
+
+                    }
+                });
+                
+            })
+
+
+
             $('body').on('submit','.ItemForm',function (e) {
                 
                 e.preventDefault();

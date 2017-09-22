@@ -41,7 +41,7 @@
                                 }
                                 else if (item.Access.ToString().ToLower() == "none")
                                 {
-                                    <td><button type="button" class="btn btn-block btn-primary btn-sm">Request</button></td>
+                                    <td><button type="button" data-id="@item.UserID" class="btn btn-block btn-primary RequestCollection btn-sm">Request</button></td>
                                 }
                                 else if (item.Access.ToString().ToLower() == "denied")
                                 {
@@ -49,7 +49,7 @@
                                 }
                                 else if (item.Access.ToString().ToLower() == "pending")
                                 {
-                                    <td><button type="button" class="btn btn-block btn-warning disabled btn-sm">Request</button></td>
+                                    <td><button type="button" class="btn btn-block btn-warning disabled btn-sm">Pending</button></td>
                                 }
 
                                 else

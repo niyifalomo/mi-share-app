@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Mi_Share.ViewModels.CollectionAccessViewModel>
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <span class="label label-warning pull-left">@Model.Count()</span>
+        <h3 class="box-title">Request for Library Access</h3>
+
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <ul class="products-list product-list-in-box">
+
+            @{Random ran = new Random(); }
+            @foreach (var item in Model)
+            {
+                var pic = String.Concat("https://randomuser.me/api/portraits/men/", ran.Next(1, 50), ".jpg");
+
+                <li class="item">
+                    <div class="product-img">
+                        <img src="@pic" class="img-circle collectionIcon" alt="User Image">
+                    </div>
+                    <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">
+                            @item.Requester.FullName
+                            <span class="product-description">
+                                @item.DateRequested.ToShortDateString()
+                            </span>
+                        </a>
+                        @if (item.Status.ToString().ToLower() == "granted")
+                        {
+                            <button data-id="@item.ID" class="btn btn-success btn-xs pull-right disabled GrantLibraryRequest">Granted</button>
+                            <button data-id="@item.ID" class="btn btn-danger btn-xs pull-right DenyLibraryRequest">Deny</button>
+                        }
+                        else if (item.Status.ToString().ToLower() == "denied")
+                        {
+                            <button data-id="@item.ID" class="btn btn-danger btn-xs pull-right disabled">Denied</button>
+                            <button data-id="@item.ID" class="btn btn-success btn-xs pull-right GrantLibraryRequest">Grant</button>
+                        }
+                        else
+                        {
+                        <button data-id="@item.ID" class="btn btn-success btn-xs pull-right GrantLibraryRequest">Grant</button>
+                        <button data-id="@item.ID" class="btn btn-danger btn-xs pull-right DenyLibraryRequest">Deny</button>
+                        }
+                    </div>
+                </li>
+            }
+            
+        </ul>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer text-center">
+        @*<a href="javascript:void(0)" class="uppercase">View All Products</a>*@
+    </div>
+    <!-- /.box-footer -->
+</div>

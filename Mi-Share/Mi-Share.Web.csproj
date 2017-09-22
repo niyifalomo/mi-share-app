@@ -262,6 +262,8 @@
     <Content Include="Views\Request\PendingRequests.cshtml" />
     <Content Include="Views\Request\PendingItemsRequestedFor.cshtml" />
     <Content Include="Views\Request\PendingLibrariesRequestedFor.cshtml" />
+    <Content Include="Views\Request\MyItemsRequestedFor.cshtml" />
+    <Content Include="Views\Request\MyLibraryRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

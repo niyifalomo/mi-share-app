@@ -11,8 +11,17 @@ namespace Mi_Share.Service
 {
     public interface IRequestService {
         bool AddCollectionRequest(CollectionAccess request);
+
+        bool UpdateCollectionRequest(CollectionAccess request,bool grant);
+
         IEnumerable<Request> PendingItemsRequestedFor(int UserID);
         IEnumerable<CollectionAccess> PendingLibrariesRequestedFor(int UserID);
+        IEnumerable<Request> MyItemsRequestedFor(int userID);
+        IEnumerable<CollectionAccess> MyLibraryRequests(int userID);
+
+        CollectionAccess GetCollectionRequest(int id);
+
+        bool DeleteCollectionRequest(CollectionAccess request);
     }
     public class RequestService : IRequestService
     {
@@ -34,6 +43,31 @@ namespace Mi_Share.Service
             return SaveRequest() > 0 ? true : false;
             
         }
+
+        public bool UpdateCollectionRequest(CollectionAccess request, bool grant)
+        {
+            
+            request.Status = (grant)? CollectionAccessStatus.Granted : CollectionAccessStatus.Denied;
+            _collectionAccessRepository.Update(request);
+
+            return SaveRequest() > 0 ? true : false;
+
+        }
+        public IEnumerable<Request> MyItemsRequestedFor(int userID)
+        {
+            var requests = _requestRepository.GetMany(x => x.Item.Owner_ID == userID);
+            return requests;
+
+        }
+
+        public IEnumerable<CollectionAccess> MyLibraryRequests(int userID)
+        {
+            var requests = _collectionAccessRepository.GetMany(x => x.Owner_ID == userID);
+            return requests;
+
+        }
+
+
         public IEnumerable<CollectionAccess> PendingLibrariesRequestedFor(int UserID)
         {
             var requests = _collectionAccessRepository.GetMany(x => x.Requester_ID == UserID);
@@ -46,6 +80,18 @@ namespace Mi_Share.Service
             return requests;
         }
 
+        public CollectionAccess GetCollectionRequest(int id)
+        {
+            var request = _collectionAccessRepository.Get(x => x.ID == id);
+            return request;
+
+        }
+
+        public bool DeleteCollectionRequest(CollectionAccess request)
+        {
+            _collectionAccessRepository.Delete(request);
+            return SaveRequest() > 0 ? true : false;
+        }
         public int SaveRequest()
         {
             return _unitOfWork.Commit();

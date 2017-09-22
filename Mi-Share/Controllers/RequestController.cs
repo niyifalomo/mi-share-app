@@ -59,6 +59,41 @@ namespace Mi_Share.Controllers
             return Json("Success");
         }
 
+        [HttpPost]
+        public ActionResult GrantCollectionAccessRequest(int collectionId)
+        {
+            var request = _requestService.GetCollectionRequest(collectionId);
+
+            string response = _requestService.UpdateCollectionRequest(request,true) ? "Success" : "False";
+
+            return Json(response);
+
+        }
+
+        [HttpPost]
+        public ActionResult DenyCollectionAccessRequest(int collectionId)
+        {
+            var request = _requestService.GetCollectionRequest(collectionId);
+
+            string response = _requestService.UpdateCollectionRequest(request, false) ? "Success" : "False";
+
+            return Json(response);
+
+        }
+
+
+        [HttpPost]
+        public ActionResult CancelCollectionAccessRequest(int collectionId)
+        {
+
+            var request = _requestService.GetCollectionRequest(collectionId);
+
+            string response = _requestService.DeleteCollectionRequest(request) ? "Success" : "False";
+
+            return Json(response);
+            
+        }
+
         public PartialViewResult PendingItemsRequestedFor()
         {
             int userID = GetUserID();
@@ -74,6 +109,30 @@ namespace Mi_Share.Controllers
 
             int userID = GetUserID();
             IEnumerable<CollectionAccess> libraries = _requestService.PendingLibrariesRequestedFor(userID).ToList();
+
+            var viewModelItem = Mapper.Map<IEnumerable<CollectionAccess>, IEnumerable<CollectionAccessViewModel>>(libraries);
+
+
+            return PartialView(viewModelItem);
+        }
+
+
+
+        public PartialViewResult MyItemsRequestedFor()
+        {
+            int userID = GetUserID();
+            IEnumerable<Request> items = _requestService.MyItemsRequestedFor(userID).ToList();
+
+            var viewModelItem = Mapper.Map<IEnumerable<Request>, IEnumerable<RequestViewModel>>(items);
+
+
+            return PartialView(viewModelItem);
+        }
+        public PartialViewResult MyLibraryRequests()
+        {
+
+            int userID = GetUserID();
+            IEnumerable<CollectionAccess> libraries = _requestService.MyLibraryRequests(userID).ToList();
 
             var viewModelItem = Mapper.Map<IEnumerable<CollectionAccess>, IEnumerable<CollectionAccessViewModel>>(libraries);
 

@@ -62,6 +62,117 @@
 
             }
 
+            $('body').on('click', '.GrantLibraryRequest', function (e) {
+
+                var collectionId = $(this).attr('data-id');
+
+                var button = $(this);
+
+                var formData = "{collectionId:'" + collectionId + "'}";
+
+                if (confirm("Are you sure you want to grant this request?")) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Request/GrantCollectionAccessRequest',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                            button.text("Granted");
+                            button.addClass("disabled");
+
+                            new PNotify({
+                                title: 'Success',
+                                text: "Request granted successfully",
+                                type: 'success',
+                                styling: 'bootstrap3'
+                            });
+
+
+
+
+
+                        }
+                    });
+                }
+
+            })
+
+            $('body').on('click', '.DenyLibraryRequest', function (e) {
+
+                var collectionId = $(this).attr('data-id');
+
+                var button = $(this);
+
+                var formData = "{collectionId:'" + collectionId + "'}";
+
+                if (confirm("Are you sure you want to deny this request?")) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Request/DenyCollectionAccessRequest',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                            button.text("Denied");
+                            button.addClass("disabled");
+
+                            new PNotify({
+                                title: 'Success',
+                                text: "Request denied successfully",
+                                type: 'success',
+                                styling: 'bootstrap3'
+                            });
+
+
+
+
+
+                        }
+                    });
+                }
+
+            })
+            $('body').on('click', '.CancelCollectionAccessRequest', function (e) {
+
+                var collectionId = $(this).attr('data-id');
+
+                var button = $(this);
+
+                var formData = "{collectionId:'" + collectionId + "'}";
+
+                if (confirm("Are you sure you want to stop this request?")) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Request/CancelCollectionAccessRequest',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                            button.text("Deleted");
+                            button.removeClass("label-success");
+                            button.addClass("label-warning disabled");
+                            new PNotify({
+                                title: 'Success',
+                                text: "Request cancelled successfully",
+                                type: 'success',
+                                styling: 'bootstrap3'
+                            });
+
+
+
+
+
+                        }
+                    });
+                }
+
+            })
+
+
             $('body').on('click', '.RequestCollection', function (e) {
 
                 var userId = $(this).attr('data-id');

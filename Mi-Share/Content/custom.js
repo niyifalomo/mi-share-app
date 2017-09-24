@@ -190,6 +190,7 @@
                     success: function (data) {
                         button.text("Pending");
                         button.removeClass("btn-primary");
+                        button.removeClass("RequestCollection");
                         button.addClass("btn-warning disabled"); 
                         new PNotify({
                             title: 'Success',

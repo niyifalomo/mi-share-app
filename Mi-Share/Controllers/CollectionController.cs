@@ -61,6 +61,15 @@ namespace Mi_Share.Controllers
 
         }
 
+        public ActionResult ViewOthersCollection(int userId)
+        {
+            ViewBag.UserName = _userService.GetUserByID(userId).FullName;
+            IEnumerable<Item> items = _itemService.GetUserItems(userId).ToList();
+            var viewModelItem = Mapper.Map<IEnumerable<Item>, IEnumerable<ItemViewModel>>(items);
+            return View(viewModelItem);
+
+        }
+
 
         public PartialViewResult ItemList()
         {

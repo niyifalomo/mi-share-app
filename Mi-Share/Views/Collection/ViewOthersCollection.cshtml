@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Mi_Share.ViewModels.ItemViewModel>
+
+@{
+    ViewBag.Title = ViewBag.UserName+"'s"+"Collection";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+
+            <div class="box-body" id="ItemList" data-url="@Url.Action("ItemList")">
+                <table class="table table-bordered datatable table-striped">
+                    <thead>
+                        <tr>
+                            <th>Media Type</th>
+                            <th>Item Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Category.Name</td>
+                                <td>@item.Name</td>
+                                <td>@item.Description</td>
+                                <td>
+                                    @if (item.Status == 0)
+                                    {
+                                        <span class="label label-success">Request to borrow</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-danger">No Available</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- /.box-header -->
+
+            </div>
+                <!-- /.box-body -->
+            </div>
+    </div>
+</div>
+<script>
+    //var originalModal = $('#modal-default').clone();
+    //$(document).on('#modal-default', 'hidden.bs.modal', function () {
+    //    $('#modal-default').remove();
+    //    var myClone = originalModal.clone();
+    //    $('body').append(myClone);
+    //});
+</script>
+

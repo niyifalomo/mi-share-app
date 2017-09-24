@@ -37,11 +37,15 @@
                                 <td>@item.ItemCount</td>
                                 @if (item.Access.ToString().ToLower() == "granted")
                                 {
-                                    <td><button type="button" class="btn btn-block btn-primary btn-sm">Access Granted -- View</button></td>
+                                    <td>
+                                        <button type="button"  onclick="window.location='@Url.Action("ViewOthersCollection","Collection", new { userId = item.UserID})';" class="btn btn-block btn-primary btn-sm">
+                                          Access Granted -- View
+                                        </button>
+                                    </td>
                                 }
                                 else if (item.Access.ToString().ToLower() == "none")
                                 {
-                                    <td><button type="button" data-id="@item.UserID" class="btn btn-block btn-primary RequestCollection btn-sm">Request</button></td>
+                                    <td><button type="button" data-id="@item.UserID" class="btn btn-block btn-primary btn-sm RequestCollection">Request</button></td>
                                 }
                                 else if (item.Access.ToString().ToLower() == "denied")
                                 {

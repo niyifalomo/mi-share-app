@@ -15,9 +15,9 @@ namespace Mi_Share.Controllers
     public class RequestController : Controller
     {
         private readonly IRequestService _requestService;
-        private readonly ItemService _itemService; 
+        private readonly IItemService _itemService; 
         private readonly IUserService _userService;
-        public RequestController(IRequestService requestService, IUserService userService, ItemService itemService)
+        public RequestController(IRequestService requestService, IUserService userService, IItemService itemService)
         {
             _requestService = requestService;
             _userService = userService;

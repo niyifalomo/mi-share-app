@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Mi_Share.Controllers
 {
+    [Authorize]
     public class LoanController : Controller
     {
         // GET: Lending

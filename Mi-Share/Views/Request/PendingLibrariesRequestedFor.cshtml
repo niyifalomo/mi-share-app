@@ -22,20 +22,31 @@
             {
                 var pic = String.Concat("https://randomuser.me/api/portraits/men/", ran.Next(1, 50), ".jpg");
 
-            <li class="item">
-                <div class="product-img">
-                    <img src="@pic" class="img-circle collectionIcon" alt="User Image">
-                </div>
-                <div class="product-info">
-                    <a href="javascript:void(0)" class="product-title">
-                        @item.Owner.FullName
-                        <span class="product-description">
-                            @item.DateRequested
-                        </span>
-                        <span class="label label-success  pull-right CancelCollectionAccessRequest" data-id="@item.ID">stop request</span>
-                    </a>
-                </div>
-            </li>
+                <li class="item">
+                    <div class="product-img">
+                        <img src="@pic" class="img-circle collectionIcon" alt="User Image">
+                    </div>
+                    <div class="product-info">
+                        <a href="javascript:void(0)" class="product-title">
+                            @item.Owner.FullName
+                            <span class="product-description">
+                                @item.DateRequested
+                            </span>
+                            @if (item.Status.ToString().ToLower()!= "none")
+                            {
+                               <span class="label label-info">@item.Status.ToString()</span>
+                            }
+                            @if (item.Status.ToString().ToLower() == "granted")
+                            {
+                                <span class="label label-danger  pull-right CancelCollectionAccessRequest" data-id="@item.ID">Cancel Access</span>
+                            }
+                            else
+                            {
+                             <span class="label label-danger  pull-right CancelCollectionAccessRequest" data-id="@item.ID">Stop Request</span>
+                            }
+                        </a>
+                    </div>
+                </li>
             }
         </ul>
     </div>

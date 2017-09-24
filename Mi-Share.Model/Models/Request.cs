@@ -15,8 +15,7 @@ namespace Mi_Share.Model
         public RequestStatus Status { get; set; }
 
         public DateTime DateCreated { get; set; }
-
-        public int Updated_By { get; set; }
+        
         public DateTime? Updated_At { get; set; }
 
 

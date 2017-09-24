@@ -11,14 +11,17 @@ using Mi_Share.Model;
 
 namespace Mi_Share.Controllers
 {
+    //[Authorize]
     public class RequestController : Controller
     {
         private readonly IRequestService _requestService;
+        private readonly ItemService _itemService; 
         private readonly IUserService _userService;
-        public RequestController(IRequestService requestService, IUserService userService)
+        public RequestController(IRequestService requestService, IUserService userService, ItemService itemService)
         {
             _requestService = requestService;
             _userService = userService;
+            _itemService = itemService;
         }
         // GET: Request
         public ActionResult Index()
@@ -36,6 +39,7 @@ namespace Mi_Share.Controllers
             return View();
         }
 
+        //Send request to view Collection
         [HttpPost]
         public ActionResult RequestAccess(int userId)
         {
@@ -57,6 +61,32 @@ namespace Mi_Share.Controllers
             _requestService.AddCollectionRequest(data);
 
             return Json("Success");
+        }
+
+        //Send request to borrow item to Collection/Item owner
+        [HttpPost]
+        public ActionResult SendBorrowRequest(int itemId)
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+
+            var userID = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            var requestorID = Convert.ToInt32(userID);
+
+            var viewModel = new RequestViewModel();
+
+            viewModel.Requester = _userService.GetUserByID(requestorID);
+            viewModel.Requester_ID = requestorID;
+            viewModel.Item = _itemService.GetItemByID(itemId);
+            viewModel.Item_ID = itemId;
+            
+
+            var data = Mapper.Map<RequestViewModel, Request>(viewModel);
+
+            _requestService.AddItemBorrowRequest(data);
+
+            return Json("Success");
+
         }
 
         [HttpPost]

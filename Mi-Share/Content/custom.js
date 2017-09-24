@@ -209,6 +209,47 @@
             })
 
 
+            $('body').on('click', '.SendBorrowRequest', function (e) {
+
+                var item_id = $(this).attr('data-id');
+
+                var button = $(this);
+
+                var formData = "{itemId:'" + item_id + "'}";
+
+                //alert(item_id);
+
+               // if (confirm("Are you sure you want to send this request?")) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Request/SendBorrowRequest',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                            button.text("Pending");
+                            button.removeClass("btn-primary");
+                            button.removeClass("SendBorrowRequest");
+                            button.addClass("btn-warning disabled");
+                            new PNotify({
+                                title: 'Success',
+                                text: "Request sent successfully",
+                                type: 'success',
+                                styling: 'bootstrap3'
+                            });
+
+
+                        },
+
+                        error: function(data)
+                        {
+                            console.log(data);
+                    }
+                    });
+                //}
+
+            });
 
             $('body').on('submit','.ItemForm',function (e) {
                 

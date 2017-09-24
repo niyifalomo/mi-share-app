@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201709190415012_modifiedItemTable.Designer.cs">
       <DependentUpon>201709190415012_modifiedItemTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709242218120_AdjustedRequestTable.cs" />
+    <Compile Include="Migrations\201709242218120_AdjustedRequestTable.Designer.cs">
+      <DependentUpon>201709242218120_AdjustedRequestTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mi_ShareSeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709190415012_modifiedItemTable.resx">
       <DependentUpon>201709190415012_modifiedItemTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709242218120_AdjustedRequestTable.resx">
+      <DependentUpon>201709242218120_AdjustedRequestTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

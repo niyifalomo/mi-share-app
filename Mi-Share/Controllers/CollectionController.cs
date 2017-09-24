@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Mi_Share.Controllers
 {
+    [Authorize]
     public class CollectionController : Controller
     {
         private readonly ICategoryService _categoryService;

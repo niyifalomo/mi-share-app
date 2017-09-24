@@ -13,7 +13,6 @@ namespace Mi_Share.ViewModels
         public int Item_ID { get; set; }
         public RequestStatus Status { get; set; }
         
-        public int Updated_By { get; set; }
         public DateTime? Updated_At { get; set; }
 
 

@@ -11,6 +11,7 @@ namespace Mi_Share.Service
 {
     public interface IRequestService {
         bool AddCollectionRequest(CollectionAccess request);
+        bool AddItemBorrowRequest(Request request);
 
         bool UpdateCollectionRequest(CollectionAccess request,bool grant);
 
@@ -34,6 +35,14 @@ namespace Mi_Share.Service
             _collectionAccessRepository = collectionAccessRepository;
             _requestRepository = requestRepository;
             _unitOfWork = unitOfWork;
+        }
+
+        public bool AddItemBorrowRequest(Request request)
+        {
+            request.Status = RequestStatus.Pending;
+            _requestRepository.Add(request);
+
+            return SaveRequest() > 0 ? true : false;
         }
         public bool AddCollectionRequest(CollectionAccess request)
         {

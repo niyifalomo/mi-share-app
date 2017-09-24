@@ -27,8 +27,9 @@ namespace Mi_Share.Mappings
 
                 x.CreateMap<Request, RequestViewModel>();
                 x.CreateMap<RequestViewModel, Request>()
-                    .ForMember(c => c.DateCreated, option => option.Ignore());
-                    
+                    .ForMember(c => c.DateCreated, option => option.Ignore())
+                    .ForMember(c => c.Status, option => option.Ignore());
+
 
 
                 x.CreateMap<User, UserViewModel>();

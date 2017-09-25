@@ -21,13 +21,14 @@
             @foreach (var item in Model)
             {
                 var pic = String.Concat("https://randomuser.me/api/portraits/men/", ran.Next(1, 50), ".jpg");
+               
 
                 <li class="item">
                     <div class="product-img">
                         <img src="@pic" class="img-circle collectionIcon" alt="User Image">
                     </div>
                     <div class="product-info">
-                        <a href="javascript:void(0)" class="product-title">
+                        <a href="#" class="product-title">
                             @item.Owner.FullName
                             <span class="product-description">
                                 @item.DateRequested
@@ -38,7 +39,7 @@
                             }
                             @if (item.Status.ToString().ToLower() == "granted")
                             {
-                                <span class="label label-danger  pull-right CancelCollectionAccessRequest" data-id="@item.ID">Cancel Access</span>
+                                <span class="label label-success pull-right" onclick="window.location='@Url.Action("ViewOthersCollection","Collection", new { userId = item.Owner_ID})';"> View Collection</span>
                             }
                             else
                             {

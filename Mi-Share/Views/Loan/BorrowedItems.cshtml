@@ -1,58 +1,45 @@
-﻿
+﻿@model IEnumerable<Mi_Share.ViewModels.LoanViewModel>
 
 @{
-    ViewBag.Title = "BorrowedItems";
+    ViewBag.Title = "Borrowed Items";
 }
 
-<!-- Add pagedesign code below-->
-<div class="box">
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Borrowed Items</h3>
-
-              <div class="box-tools">
-                <div class="input-group input-group-sm" style="width: 150px;">
-                  <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
-
-                  <div class="input-group-btn">
-                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                  </div>
-                </div>
-              </div>
+                <h3 class="box-title">&nbsp;</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tbody><tr>
-                  <th>Item no</th>
-                  <th>Item Description</th>
-                  <th>Owner</th>
-                  <th>Date Borrowed</th>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>Harry Potter</td>
-                  <td>John Doe</td>
-                  <td>11-7-2017</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Dan Brown Series</td>
-                  <td>Alexander Pierce</td>
-                  <td>11-7-2014</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>How to Train your Dragon</td>
-                  <td>Bob Doe</td>
-                  <td>11-7-2014</td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Bla Bla Bla</td>
-                  <td>Mike Doe</td>
-                  <td>11-7-2014</td>
-                </tr>
-              </tbody></table>
+            <div class="box-body">
+                <table class="table table-bordered datatable table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item no</th>
+                            <th>Item Name</th>
+                            <th>Item Type</th>
+                            <th>Owner</th>
+                            <th>Date Borrowed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int i = 1;}
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>@item.Request.Item.Name</td>
+                                <td>@item.Request.Item.Category.Name</td>
+                                <td>@item.Request.Item.Owner.FullName</td>
+                                <td>@item.BeginDate.ToShortDateString()</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
             </div>
             <!-- /.box-body -->
-          </div>
+        </div>
+    </div>
+</div>

@@ -15,11 +15,14 @@ namespace Mi_Share.Controllers
     public class RequestController : Controller
     {
         private readonly IRequestService _requestService;
-        private readonly IItemService _itemService; 
+        private readonly IItemService _itemService;
+        private readonly ILoanService _loanService;
         private readonly IUserService _userService;
-        public RequestController(IRequestService requestService, IUserService userService, IItemService itemService)
+        public RequestController(IRequestService requestService, IUserService userService, IItemService itemService,
+                ILoanService loanService)
         {
             _requestService = requestService;
+            _loanService = loanService;
             _userService = userService;
             _itemService = itemService;
         }
@@ -43,10 +46,7 @@ namespace Mi_Share.Controllers
         [HttpPost]
         public ActionResult RequestAccess(int userId)
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-
-            var userID = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            int userID = GetUserID();
             var requestorID = Convert.ToInt32(userID);
 
             var viewModel = new CollectionAccessViewModel();
@@ -67,10 +67,7 @@ namespace Mi_Share.Controllers
         [HttpPost]
         public ActionResult SendBorrowRequest(int itemId)
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-
-            var userID = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+            int userID = GetUserID();
             var requestorID = Convert.ToInt32(userID);
 
             var viewModel = new RequestViewModel();
@@ -112,6 +109,16 @@ namespace Mi_Share.Controllers
                 item.Status = ItemStatus.Borrowed;
                 _itemService.UpdateItem(item);
 
+                //create loan
+
+                var loan = new LoanViewModel();
+                loan.BeginDate = DateTime.Now;
+                loan.Request = request;
+                loan.Request_ID = requestId;
+
+                var data = Mapper.Map<LoanViewModel, Loan>(loan);
+                _loanService.AddLoan(data);
+                
 
                 return Json("true");
             }

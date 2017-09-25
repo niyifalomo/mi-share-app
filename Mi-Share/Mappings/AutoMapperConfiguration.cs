@@ -40,7 +40,8 @@ namespace Mi_Share.Mappings
                     
 
                 x.CreateMap<Loan, LoanViewModel>();
-                x.CreateMap<LoanViewModel, Loan>();
+                x.CreateMap<LoanViewModel, Loan>()
+                    .ForMember(c => c.Status, option => option.Ignore());
 
                 x.CreateMap<UsersCollections, UsersCollectionsViewModel>();
                 x.CreateMap<UsersCollectionsViewModel, UsersCollections>();

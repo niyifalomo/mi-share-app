@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,9 @@ namespace Mi_Share.Model
     }
 
     public enum LoanStatus {
+        [Description("On loan")]
         OnLoan,
+        [Description("Returned")]
         Returned
     }
 }

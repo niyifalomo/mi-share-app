@@ -266,6 +266,7 @@
     <Content Include="Views\Request\MyLibraryRequests.cshtml" />
     <Content Include="Views\Collection\ViewOthersCollection.cshtml" />
     <Content Include="Views\Collection\OthersItemList.cshtml" />
+    <Content Include="Views\Loan\LoanedItemsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

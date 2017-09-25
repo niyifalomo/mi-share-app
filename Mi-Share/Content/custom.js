@@ -360,6 +360,8 @@
 
             });
 
+
+
             $('body').on('click', '.DenyBorrowRequest', function (e) {
 
                 var requestId = $(this).attr('data-id');
@@ -388,6 +390,44 @@
                             var itemsUrl = $("#MyItemRequestList").data("url");
 
                             $("#MyItemRequestList").load(itemsUrl, function () {
+
+                            });
+
+                        }
+                    });
+                }
+
+            });
+            
+
+            $('body').on('click', '.ReturnLoanedItem', function (e) {
+
+                var loanId = $(this).attr('data-id');
+
+                var button = $(this);
+
+                var formData = "{loanId:'" + loanId + "'}";
+
+                if (confirm("Are you sure the item has been returned?")) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Loan/ReturnLoanedItem',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+
+                            new PNotify({
+                                title: 'Success',
+                                text: "Item has been returned",
+                                type: 'success',
+                                styling: 'bootstrap3'
+                            });
+
+                            var itemsUrl = $("#LoanedItemsList").data("url");
+
+                            $("#LoanedItemsList").load(itemsUrl, function () {
 
                             });
 

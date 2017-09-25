@@ -17,6 +17,8 @@ namespace Mi_Share.Service
         bool DeleteItem(Item item);
         IEnumerable<Item> GetItems();
 
+        bool ChangeItemStatus(Item item, bool available);
+
         Item GetItemByID(int id);
 
         IEnumerable<Item> GetUserItems(int id);
@@ -44,6 +46,15 @@ namespace Mi_Share.Service
 
         public bool UpdateItem(Item item)
         {
+            _itemRepository.Update(item);
+
+            return SaveItem() > 0 ? true : false;
+        }
+
+        public bool ChangeItemStatus(Item item, bool available)
+        {
+            item.Status = available ? ItemStatus.Available : ItemStatus.Borrowed;
+
             _itemRepository.Update(item);
 
             return SaveItem() > 0 ? true : false;

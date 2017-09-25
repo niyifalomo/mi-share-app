@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Mi_Share.ViewModels.LoanViewModel>
+
+<div class="row">
+
+    <!-- /.col -->
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">&nbsp;</h3>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered datatable table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 10px">#</th>
+                            <th>Item Name</th>
+                            <th>Item Type</th>
+                            <th>Borrowed by</th>
+                            <th style="width: 40px">Date Borrowed</th>
+                            <th style="width: 40px">Date Returned</th>
+                            <th>Return Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int i = 1;}
+                        @foreach (var item in Model)
+                        {
+                            string StyleClass = "label-info";
+                            string status = "Returned";
+
+                            if (item.Status.ToString().ToLower() == "onloan")
+                            {
+                                StyleClass = "label-warning";
+                                status = "On loan";
+                            }
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>@item.Request.Item.Name</td>
+                                <td>@item.Request.Item.Category.Name</td>
+                                <td>@item.Request.Requester.FullName</td>
+                                <td>@item.BeginDate.ToShortDateString()</td>
+                                <td>@if (@item.ReturnDate != null)
+                                {@item.ReturnDate.Value.ToShortDateString()}</td>
+                                <td><span class="label @StyleClass">@status</span></td>
+                                <td>
+                                    @if (item.Status.ToString().ToLower() == "onloan")
+                                {
+                                    <button data-id="@item.ID" class="btn btn-xs btn-primary ReturnLoanedItem">Return Item</button>
+                                }
+                            </td>
+
+                        </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <!-- /.row -->
+
+
+    </div>
+</div>

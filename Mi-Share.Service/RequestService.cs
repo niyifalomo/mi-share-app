@@ -21,9 +21,11 @@ namespace Mi_Share.Service
         bool DeleteItemRequest(Request request);
 
         IEnumerable<Request> PendingItemsRequestedFor(int UserID);
+       
         IEnumerable<CollectionAccess> PendingLibrariesRequestedFor(int UserID);
         IEnumerable<Request> MyItemsRequestedFor(int userID);
         IEnumerable<CollectionAccess> MyLibraryRequests(int userID);
+
 
         CollectionAccess GetCollectionRequest(int id);
 
@@ -33,12 +35,14 @@ namespace Mi_Share.Service
     {
         private readonly ICollectionAccessRepository _collectionAccessRepository;
         private readonly IRequestRepository _requestRepository;
+        private readonly ILoanRepository _loanRepository;
         private readonly IUnitOfWork _unitOfWork;
         public RequestService(ICollectionAccessRepository collectionAccessRepository, IUnitOfWork unitOfWork,
-            IRequestRepository requestRepository)
+            IRequestRepository requestRepository, ILoanRepository loanRepository)
         {
             _collectionAccessRepository = collectionAccessRepository;
             _requestRepository = requestRepository;
+            _loanRepository = loanRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -46,6 +50,8 @@ namespace Mi_Share.Service
         {
             request.Status = RequestStatus.Pending;
             _requestRepository.Add(request);
+
+            
 
             return SaveRequest() > 0 ? true : false;
         }
@@ -80,9 +86,16 @@ namespace Mi_Share.Service
 
         public bool UpdateItemRequest(Request request, bool grant)
         {
+            
             request.Status = (grant) ? RequestStatus.Granted : RequestStatus.Denied;
             request.Updated_At = DateTime.Now;
             _requestRepository.Update(request);
+
+            if (grant)
+            {
+                
+            }
+
 
             return SaveRequest() > 0 ? true : false;
 

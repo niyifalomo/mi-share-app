@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="~/Content/custom.css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="~/Content/Template/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="~/Content/Template/dist/css/skins/skin-blue.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="~/Content/Template/plugins/iCheck/flat/blue.css">
     <!-- Morris chart -->
@@ -60,7 +60,7 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
+                        @*<li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-envelope-o"></i>
                                 <span class="label label-success">4</span>
@@ -136,8 +136,8 @@
                                 </li>
                                 <li class="footer"><a href="#">See All Messages</a></li>
                             </ul>
-                        </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
+                        </li>*@
+                        @*<!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown notifications-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell-o"></i>
@@ -178,85 +178,8 @@
                                 </li>
                                 <li class="footer"><a href="#">View all</a></li>
                             </ul>
-                        </li>
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-flag-o"></i>
-                                <span class="label label-danger">9</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 9 tasks</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Design some buttons
-                                                    <small class="pull-right">20%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">20% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Create a nice theme
-                                                    <small class="pull-right">40%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">40% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Some task I need to do
-                                                    <small class="pull-right">60%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">60% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Make beautiful transitions
-                                                    <small class="pull-right">80%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">80% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                    </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">View all tasks</a>
-                                </li>
-                            </ul>
-                        </li>
+                        </li>*@
+                        
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -273,9 +196,7 @@
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
+                                    
                                     <div class="pull-right">
                                         <a href="@Url.Action("Logout","Account")" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
@@ -316,7 +237,7 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
-                    <li class="active treeview">
+                    @*<li class="active treeview">
                         <a href="@Url.Action("Index","Home")">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             <span class="pull-right-container">
@@ -324,7 +245,7 @@
                             </span>
                         </a>
                         
-                    </li>
+                    </li>*@
                     
                    
                     <li class="treeview">
@@ -349,7 +270,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="@Url.Action("LoanedItems","Loan")"><i class="fa fa-circle-o"></i> Lended Items</a></li>
+                            <li><a href="@Url.Action("LoanedItems","Loan")"><i class="fa fa-circle-o"></i> Loaned Items</a></li>
                             <li><a href="@Url.Action("BorrowedItems", "Loan")"><i class="fa fa-circle-o"></i> Borrowed Items</a></li>
 
                         </ul>
@@ -358,12 +279,13 @@
                         <a href="#">
                             <i class="fa fa-envelope"></i> <span>Requests</span>
                             <span class="pull-right-container">
+                                <i class="fa fa-circle text-red"></i>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="@Url.Action("MyRequests","Request")"><i class="fa fa-circle-o"></i>My Requests</a></li>
-                            <li><a href="@Url.Action("PendingRequests", "Request")"><i class="fa fa-circle-o"></i>Pending Requests</a></li>
+                            <li><a href="@Url.Action("MyRequests","Request")"><i class="fa fa-circle-o"></i>Received Requests</a></li>
+                            <li><a href="@Url.Action("PendingRequests", "Request")"><i class="fa fa-circle-o"></i>Sent Requests</a></li>
 
                         </ul>
                     </li>
@@ -445,8 +367,8 @@
     <script src="~/Content/Template/plugins/pnotify/dist/pnotify.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/Content/Template/dist/js/pages/dashboard.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/Content/Template/dist/js/demo.js"></script>
+     @*AdminLTE for demo purposes 
+    <script src="~/Content/Template/dist/js/demo.js"></script>*@
     <script src="~/Content/custom.js"></script>  
     <script src="~/Scripts/jquery.unobtrusive-ajax.js" type="text/javascript"></script>
    

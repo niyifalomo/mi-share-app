@@ -77,12 +77,21 @@
     <Compile Include="Migrations\201709242218120_AdjustedRequestTable.Designer.cs">
       <DependentUpon>201709242218120_AdjustedRequestTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709250222468_AdjustedLoanTable.cs" />
+    <Compile Include="Migrations\201709250222468_AdjustedLoanTable.Designer.cs">
+      <DependentUpon>201709250222468_AdjustedLoanTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709250307215_AdjustedLoanTable1.cs" />
+    <Compile Include="Migrations\201709250307215_AdjustedLoanTable1.Designer.cs">
+      <DependentUpon>201709250307215_AdjustedLoanTable1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Mi_ShareSeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CollectionAccessRepository.cs" />
     <Compile Include="Repositories\ItemRepository.cs" />
+    <Compile Include="Repositories\LoanRepository.cs" />
     <Compile Include="Repositories\RequestRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
@@ -105,6 +114,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709242218120_AdjustedRequestTable.resx">
       <DependentUpon>201709242218120_AdjustedRequestTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709250222468_AdjustedLoanTable.resx">
+      <DependentUpon>201709250222468_AdjustedLoanTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709250307215_AdjustedLoanTable1.resx">
+      <DependentUpon>201709250307215_AdjustedLoanTable1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

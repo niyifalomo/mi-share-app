@@ -66,7 +66,7 @@ namespace Mi_Share.Controllers
                     HttpContext.GetOwinContext().Authentication.SignIn(new AuthenticationProperties
                     { IsPersistent = false }, ident);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Collection");
 
                 }
 

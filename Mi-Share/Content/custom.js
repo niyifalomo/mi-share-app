@@ -97,7 +97,7 @@
                     });
                 }
 
-            })
+            });
 
             $('body').on('click', '.DenyLibraryRequest', function (e) {
 
@@ -134,7 +134,9 @@
                     });
                 }
 
-            })
+            });
+
+
             $('body').on('click', '.CancelCollectionAccessRequest', function (e) {
 
                 var collectionId = $(this).attr('data-id');
@@ -219,7 +221,7 @@
 
                 //alert(item_id);
 
-               // if (confirm("Are you sure you want to send this request?")) {
+                if (confirm("Are you sure you want to send this request?")) {
 
                     $.ajax({
                         type: "POST",
@@ -228,13 +230,13 @@
                         dataType: 'json',
                         contentType: "application/json",
                         success: function (data) {
-                            button.text("Pending");
-                            button.removeClass("btn-primary");
+                            button.text("Borrow Request Sent");
+                            button.removeClass("btn-success");
                             button.removeClass("SendBorrowRequest");
                             button.addClass("btn-warning disabled");
                             new PNotify({
                                 title: 'Success',
-                                text: "Request sent successfully",
+                                text: "Borrow Request sent Successfully",
                                 type: 'success',
                                 styling: 'bootstrap3'
                             });
@@ -247,7 +249,7 @@
                             console.log(data);
                     }
                     });
-                //}
+                }
 
             });
 
@@ -280,4 +282,117 @@
                         }
                     });
                 
+            });
+
+
+
+            $('body').on('click','.CancelSentItemRequest', function (e) {
+                
+                var requestId = $(this).attr('data-id');
+
+                var button = $(this);
+
+                var formData = "{requestId:'" + requestId + "'}";
+
+                if (confirm("Are you sure you want to stop this request?")) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Request/CancelSentItemRequest',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                            button.text("Deleted");
+                            button.removeClass("btn-danger");
+                            button.addClass("btn-warning disabled");
+                            new PNotify({
+                                title: 'Success',
+                                text: "Request cancelled successfully",
+                                type: 'success',
+                                styling: 'bootstrap3'
+                            });
+
+
+
+
+
+                        }
+                    });
+                }
+
+            });
+            
+            $('body').on('click', '.GrantBorrowRequest', function (e) {
+                
+                var requestId = $(this).attr('data-id');
+
+                var button = $(this);
+
+                var formData = "{requestId:'" + requestId + "'}";
+
+                if (confirm("Are you sure you want grant this borrow request?")) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Request/GrantBorrowRequest',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                           
+                            new PNotify({
+                                title: 'Success',
+                                text: "Request granted successfully",
+                                type: 'success',
+                                styling: 'bootstrap3'
+                            });
+
+                            var itemsUrl = $("#MyItemRequestList").data("url");
+
+                            $("#MyItemRequestList").load(itemsUrl, function () {
+                               
+                            });
+
+                        }
+                    });
+                }
+
+            });
+
+            $('body').on('click', '.DenyBorrowRequest', function (e) {
+
+                var requestId = $(this).attr('data-id');
+
+                var button = $(this);
+
+                var formData = "{requestId:'" + requestId + "'}";
+
+                if (confirm("Are you sure you want reject this borrow request?")) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/Request/DenyBorrowRequest',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: "application/json",
+                        success: function (data) {
+                            
+                            new PNotify({
+                                title: 'Success',
+                                text: "Request denied successfully",
+                                type: 'success',
+                                styling: 'bootstrap3'
+                            });
+
+                            var itemsUrl = $("#MyItemRequestList").data("url");
+
+                            $("#MyItemRequestList").load(itemsUrl, function () {
+
+                            });
+
+                        }
+                    });
+                }
+
             });

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Mi_Share.ViewModels.ItemViewModel>
 
 @{
-    ViewBag.Title = ViewBag.UserName+"'s"+" Collection";
+    ViewBag.Title = ViewBag.UserName + "'s" + " Collection";
 }
 
 <div class="row">
@@ -28,7 +28,7 @@
                                 <td>
                                     @if (item.Status == 0)
                                     {
-                                        <span class="label label-success SendBorrowRequest" data-id="@item.ID">Request to Borrow</span>
+                                        <button class="btn btn-xs btn-success SendBorrowRequest" data-id="@item.ID">Request to Borrow</button>
                                     }
                                     else
                                     {
@@ -43,8 +43,8 @@
                 <!-- /.box-header -->
 
             </div>
-                <!-- /.box-body -->
-            </div>
+            <!-- /.box-body -->
+        </div>
     </div>
 </div>
 <script>

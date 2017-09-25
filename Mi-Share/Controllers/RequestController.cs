@@ -101,6 +101,42 @@ namespace Mi_Share.Controllers
         }
 
         [HttpPost]
+        public ActionResult GrantBorrowRequest(int requestId)
+        {
+            var request = _requestService.GetItemRequest(requestId);
+
+            if (_requestService.UpdateItemRequest(request, true))
+            {
+                //update item  status to not available
+                var item = _itemService.GetItemByID(request.Item.ID);
+                item.Status = ItemStatus.Borrowed;
+                _itemService.UpdateItem(item);
+
+
+                return Json("true");
+            }
+            else
+            {
+                return Json("false");
+            }
+            
+
+        }
+
+        [HttpPost]
+        public ActionResult DenyBorrowRequest(int requestId)
+        {
+            var request = _requestService.GetItemRequest(requestId);
+
+            string response = _requestService.UpdateItemRequest(request, false) ? "Success" : "False";
+            
+                return Json(response);
+           
+
+
+        }
+
+        [HttpPost]
         public ActionResult DenyCollectionAccessRequest(int collectionId)
         {
             var request = _requestService.GetCollectionRequest(collectionId);
@@ -124,6 +160,17 @@ namespace Mi_Share.Controllers
             
         }
 
+        [HttpPost]
+        public ActionResult CancelSentItemRequest(int requestId)
+        {
+            var request = _requestService.GetItemRequest(requestId);
+
+            string response = _requestService.DeleteItemRequest(request) ? "Success" : "False";
+
+            return Json(response);
+
+        }
+
         public PartialViewResult PendingItemsRequestedFor()
         {
             int userID = GetUserID();
@@ -131,8 +178,9 @@ namespace Mi_Share.Controllers
 
             var viewModelItem = Mapper.Map<IEnumerable<Request>, IEnumerable<RequestViewModel>>(items);
 
-
             return PartialView(viewModelItem);
+
+
         }
         public PartialViewResult PendingLibrariesRequestedFor()
         {

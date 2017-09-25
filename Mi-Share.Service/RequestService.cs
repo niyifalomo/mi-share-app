@@ -13,7 +13,12 @@ namespace Mi_Share.Service
         bool AddCollectionRequest(CollectionAccess request);
         bool AddItemBorrowRequest(Request request);
 
+
         bool UpdateCollectionRequest(CollectionAccess request,bool grant);
+        bool UpdateItemRequest(Request request, bool grant);
+
+        Request GetItemRequest(int id);
+        bool DeleteItemRequest(Request request);
 
         IEnumerable<Request> PendingItemsRequestedFor(int UserID);
         IEnumerable<CollectionAccess> PendingLibrariesRequestedFor(int UserID);
@@ -53,11 +58,31 @@ namespace Mi_Share.Service
             
         }
 
+        public Request GetItemRequest(int id) {
+            var request = _requestRepository.Get(x => x.ID == id);
+            return request;
+        }
+        public bool DeleteItemRequest(Request request)
+        {
+            _requestRepository.Delete(request);
+            return SaveRequest() > 0 ? true : false;
+        }
+
         public bool UpdateCollectionRequest(CollectionAccess request, bool grant)
         {
             
             request.Status = (grant)? CollectionAccessStatus.Granted : CollectionAccessStatus.Denied;
             _collectionAccessRepository.Update(request);
+
+            return SaveRequest() > 0 ? true : false;
+
+        }
+
+        public bool UpdateItemRequest(Request request, bool grant)
+        {
+            request.Status = (grant) ? RequestStatus.Granted : RequestStatus.Denied;
+            request.Updated_At = DateTime.Now;
+            _requestRepository.Update(request);
 
             return SaveRequest() > 0 ? true : false;
 

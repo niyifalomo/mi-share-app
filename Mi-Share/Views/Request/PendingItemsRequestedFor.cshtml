@@ -1,8 +1,9 @@
-﻿
+﻿@model IEnumerable<Mi_Share.ViewModels.RequestViewModel>
+
 <div class="box box-info">
     <div class="box-header with-border">
-        <span class="label label-success pull-left">4</span>
-        <h3 class="box-title">Items Requesteds</h3>
+        <span class="label label-success pull-left">@Model.Count()</span>
+        <h3 class="box-title">Items Requested For</h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse">
@@ -17,7 +18,7 @@
             <table class="table no-margin">
                 <thead>
                     <tr>
-                        <th>Item ID</th>
+                        <th>S/N</th>
                         <th>Item name</th>
                         <th>Item Type</th>
                         <th>Date Requested</th>
@@ -27,50 +28,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                        <td>Call of Duty IV</td>
-                        <td>Movie</td>
-                        <td>6th Oct, 2016</td>
-                        <td><span class="label label-success">Shipped</span></td>
-                        <td><a href="pages/examples/invoice.html">sam</a></td>
-                        <td>
-                            <button type="button" class="btn btn-xs  btn-danger">stop request</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                        <td>Sam the killer</td>
-                        <td>Movie</td>
-                        <td>6th Oct, 2016</td>
-                        <td><span class="label label-info">Shipped</span></td>
-                        <td><a href="pages/examples/invoice.html">osas</a></td>
-                        <td>
-                            <button type="button" class="btn btn-xs  btn-danger">stop request</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                        <td>Dance for me</td>
-                        <td>Music</td>
-                        <td>6th Oct, 2016</td>
-                        <td><span class="label label-success">Shipped</span></td>
-                        <td><a href="pages/examples/invoice.html">niyi</a></td>
-                        <td>
-                            <button type="button" class="btn btn-xs  btn-danger">stop request</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                        <td>Smart Thinkers</td>
-                        <td>Book</td>
-                        <td>6th Oct, 2016</td>
-                        <td><span class="label label-warning">Shipped</span></td>
-                        <td><a href="pages/examples/invoice.html">kim</a></td>
-                        <td>
-                            <button type="button" class="btn btn-xs  btn-danger">stop request</button>
-                        </td>
-                    </tr>
+                    @{ int i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        string StyleClass = "label-info";
+
+                        if (item.Status.ToString().ToLower() == "pending")
+                        {
+                            StyleClass = "label-warning";
+                        }
+                        if (item.Status.ToString().ToLower() == "denied")
+                        {
+                            StyleClass = "label-danger";
+                        }
+
+                        <tr>
+                            <td>@(i++)</td>
+                            <td>@item.Item.Name</td>
+                            <td>@item.Item.Category.Name</td>
+                            <td>@item.DateCreated.ToLongDateString()</td>
+                            <td><span class="label @StyleClass">@item.Status.ToString()</span></td>
+                            <td><a href="#">@item.Item.Owner.FullName</a></td>
+                            <td>
+                                <!--User can only cancel pending request-->
+                                @if (@item.Status.ToString().ToLower() == "pending")
+                                {
+                                 <button data-id="@item.ID"  class="btn btn-xs btn-danger pull-right CancelSentItemRequest">Stop Request</button>
+                                }
+                            </td>
+                        </tr>
+                       
+                    }
+                    
                 </tbody>
             </table>
         </div>

@@ -3,5 +3,8 @@
     ViewBag.Title = "Loaned Items";
 }
 
-<!-- Add pagedesign code below-->
+<div id="LoanedItemsList" data-url="@Url.Action("LoanedItemsList")>
 
+    @{ Html.RenderAction("LoanedItemsList", "Loan");}
+
+</div>

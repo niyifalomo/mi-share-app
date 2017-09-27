@@ -1,7 +1,62 @@
 ﻿
-@{
-    ViewBag.Title = "Pending Requests";
-}
 
 <!-- Add pagedesign code below-->
+<section class="content-header">
+      <h1>
+        @{ViewBag.Title = "Sent Requests";}
+      </h1>
+      <!-- <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">@ViewBag.Title</li>
+      </ol> -->
+    </section>  
+    <section class="content">
+      <!-- Info boxes -->
+      
+      <!-- /.row -->
 
+      
+      <!-- /.row -->
+
+      <!-- Main row -->
+      <div class="row">
+        <!-- Left col -->
+        <div class="col-md-8">
+          <!-- MAP & BOX PANE -->
+          
+          <!-- /.box -->
+          
+          <!-- /.row -->
+
+          <!-- TABLE: LATEST ORDERS -->
+          @{ 
+              Html.RenderAction("PendingItemsRequestedFor", "Request");
+          }
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+
+        <div class="col-md-4">
+          <!-- Info Boxes Style 2 -->
+          
+          <!-- /.info-box -->
+          
+          <!-- /.info-box -->
+          
+          <!-- /.info-box -->
+          
+          <!-- /.info-box -->
+
+          
+          <!-- /.box -->
+
+          <!-- PRODUCT LIST -->
+           @{ 
+               Html.RenderAction("PendingLibrariesRequestedFor","Request");
+           }
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </section>

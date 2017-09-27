@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Mi_Share.ViewModels.ItemViewModel>
+
+
+<table class="table table-bordered datatable table-striped">
+    <thead>
+        <tr>
+            <th>Media Type</th>
+            <th>Item Name</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Category.Name</td>
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>
+                    @if (item.Status == 0)
+                    {
+                        <span class="label label-success">Available</span>
+                    }
+                    else
+                    {
+                        <span class="label label-danger">Borrowed</span>
+                    }
+                </td>
+                <td>
+                    <button type="button" onclick="editItem(@item.ID)" class="btn btn-sm  btn-primary">Edit</button>
+                    <button type="button" onclick="deleteItem(@item.ID)" class="btn btn-sm  btn-danger">Delete</button>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

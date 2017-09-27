@@ -260,6 +260,13 @@
     <Content Include="Views\Loan\BorrowedItems.cshtml" />
     <Content Include="Views\Request\MyRequests.cshtml" />
     <Content Include="Views\Request\PendingRequests.cshtml" />
+    <Content Include="Views\Request\PendingItemsRequestedFor.cshtml" />
+    <Content Include="Views\Request\PendingLibrariesRequestedFor.cshtml" />
+    <Content Include="Views\Request\MyItemsRequestedFor.cshtml" />
+    <Content Include="Views\Request\MyLibraryRequests.cshtml" />
+    <Content Include="Views\Collection\ViewOthersCollection.cshtml" />
+    <Content Include="Views\Collection\OthersItemList.cshtml" />
+    <Content Include="Views\Loan\LoanedItemsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

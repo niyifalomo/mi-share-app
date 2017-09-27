@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Mi_Share.ViewModels.CollectionAccessViewModel>
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <span class="label label-warning pull-left">@Model.Count()</span>
+        <h3 class="box-title">Library Access Requested for</h3>
+
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <ul class="products-list product-list-in-box">
+
+            @{Random ran = new Random(); }
+            @foreach (var item in Model)
+            {
+                var pic = String.Concat("https://randomuser.me/api/portraits/men/", ran.Next(1, 50), ".jpg");
+               
+
+                <li class="item">
+                    <div class="product-img">
+                        <img src="@pic" class="img-circle collectionIcon" alt="User Image">
+                    </div>
+                    <div class="product-info">
+                        <a href="#" class="product-title">
+                            @item.Owner.FullName
+                            <span class="product-description">
+                                @item.DateRequested
+                            </span>
+                            @if (item.Status.ToString().ToLower()!= "none")
+                            {
+                               <span class="label label-info">@item.Status.ToString()</span>
+                            }
+                            @if (item.Status.ToString().ToLower() == "granted")
+                            {
+                                <span class="label label-success pull-right" onclick="window.location='@Url.Action("ViewOthersCollection","Collection", new { userId = item.Owner_ID})';"> View Collection</span>
+                            }
+                            else
+                            {
+                             <span class="label label-danger  pull-right CancelCollectionAccessRequest" data-id="@item.ID">Stop Request</span>
+                            }
+                        </a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer text-center">
+        @*<a href="javascript:void(0)" class="uppercase">View All Products</a>*@
+    </div>
+    <!-- /.box-footer -->
+</div>

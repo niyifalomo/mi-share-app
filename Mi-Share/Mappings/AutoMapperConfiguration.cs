@@ -27,8 +27,9 @@ namespace Mi_Share.Mappings
 
                 x.CreateMap<Request, RequestViewModel>();
                 x.CreateMap<RequestViewModel, Request>()
-                    .ForMember(c => c.DateCreated, option => option.Ignore());
-                    
+                    .ForMember(c => c.DateCreated, option => option.Ignore())
+                    .ForMember(c => c.Status, option => option.Ignore());
+
 
 
                 x.CreateMap<User, UserViewModel>();
@@ -39,14 +40,16 @@ namespace Mi_Share.Mappings
                     
 
                 x.CreateMap<Loan, LoanViewModel>();
-                x.CreateMap<LoanViewModel, Loan>();
+                x.CreateMap<LoanViewModel, Loan>()
+                    .ForMember(c => c.Status, option => option.Ignore());
 
                 x.CreateMap<UsersCollections, UsersCollectionsViewModel>();
                 x.CreateMap<UsersCollectionsViewModel, UsersCollections>();
 
                 x.CreateMap<CollectionAccess, CollectionAccessViewModel>();
-                x.CreateMap<CollectionAccessViewModel, CollectionAccess>();
-
+                x.CreateMap<CollectionAccessViewModel, CollectionAccess>()
+                    .ForMember(c=>c.Status,option=>option.Ignore())
+                    .ForMember(c => c.DateRequested, option => option.Ignore());
             });
         }
     }

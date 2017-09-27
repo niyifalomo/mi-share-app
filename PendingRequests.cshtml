@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Mi_Share.ViewModels.RequestViewModel>
+
+
+@{
+    ViewBag.Title = "Pending Requests";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box">
+            <!-- /.box-header -->
+            <div class="box-header">
+                <h3 class="box-title">&nbsp;</h3>
+
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered datatable table-striped">
+                    <thead>
+                        <tr>
+                            <th>Media Type</th>
+                            <th>Item Name</th>
+                            <th>Item Description</th>
+                            <th>Item Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{Random ran = new Random(); }
+                        @foreach (var item in Model)
+                        {
+                              <tr>
+                            
+                                <td>@item.Item_ID</td>
+                                <td>@item.Item</td>
+                                @if (item.Status.ToString().ToLower() == "pending")
+                                {
+                                    <td><button type="button" class="btn btn-block btn-primary btn-sm">Granted -- View</button></td>
+                                }
+                                else if (item.Status.ToString().ToLower() == "granted")
+                                {
+                                    <td><button type="button" class="btn btn-block btn-primary btn-sm">Request</button></td>
+                                }
+                                else if (item.Status.ToString().ToLower() == "denied")
+                                {
+                                    <td><button type="button" class="btn btn-block btn-danger disabled btn-sm">Denied</button></td>
+                                }
+
+                                else
+                                {
+                                    <td><button type="button" class="btn btn-block btn-primary btn-sm disabled">@item.Status.ToString()</button></td>
+                                }
+
+                            </tr>
+                        }
+
+
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+
+
+
+

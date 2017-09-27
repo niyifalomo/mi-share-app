@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Mi_Share.Controllers
 {
+    [Authorize]
     public class CollectionController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -58,6 +59,15 @@ namespace Mi_Share.Controllers
             var userViewModel = Mapper.Map<IEnumerable<UsersCollections>,IEnumerable<UsersCollectionsViewModel>> (users);
 
             return View(userViewModel);
+
+        }
+
+        public ActionResult ViewOthersCollection(int userId)
+        {
+            ViewBag.UserName = _userService.GetUserByID(userId).FullName;
+            IEnumerable<Item> items = _itemService.GetUserItems(userId).ToList();
+            var viewModelItem = Mapper.Map<IEnumerable<Item>, IEnumerable<ItemViewModel>>(items);
+            return View(viewModelItem);
 
         }
 

@@ -6,31 +6,46 @@
 }
 
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="box">
             <!-- /.box-header -->
+            <div class="box-header">
+                <h3 class="box-title">&nbsp;</h3>
+                
+            </div>
             <div class="box-body">
-                <table id="example1" class="table table-bordered table-striped">
+                <table class="table table-bordered datatable table-striped">
                     <thead>
                         <tr>
+                            <th></th>
                             <th>User Name</th>
                             <th>Total Items in Library</th>
                             <th>Request Browsing Access</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @{Random ran = new Random(); }
                         @foreach (var item in Model)
                         {
+                            var pic =String.Concat("https://randomuser.me/api/portraits/men/", ran.Next(1, 50), ".jpg");
+                            
                             <tr>
+                                <td><div class="pull-left image ">
+                                    <img src="@pic" class="img-circle collectionIcon" alt="User Image">
+                                </div></td>
                                 <td>@item.FullName</td>
                                 <td>@item.ItemCount</td>
                                 @if (item.Access.ToString().ToLower() == "granted")
                                 {
-                                    <td><button type="button" class="btn btn-block btn-primary btn-sm">Granted -- View</button></td>
+                                    <td>
+                                        <button type="button"  onclick="window.location='@Url.Action("ViewOthersCollection","Collection", new { userId = item.UserID})';" class="btn btn-block btn-primary btn-sm">
+                                          Access Granted -- View
+                                        </button>
+                                    </td>
                                 }
                                 else if (item.Access.ToString().ToLower() == "none")
                                 {
-                                    <td><button type="button" class="btn btn-block btn-primary btn-sm">Request</button></td>
+                                    <td><button type="button" data-id="@item.UserID" class="btn btn-block btn-primary btn-sm RequestCollection">Request</button></td>
                                 }
                                 else if (item.Access.ToString().ToLower() == "denied")
                                 {
@@ -38,7 +53,7 @@
                                 }
                                 else if (item.Access.ToString().ToLower() == "pending")
                                 {
-                                    <td><button type="button" class="btn btn-block btn-warning disabled btn-sm">Request</button></td>
+                                    <td><button type="button" class="btn btn-block btn-warning disabled btn-sm">Pending</button></td>
                                 }
 
                                 else

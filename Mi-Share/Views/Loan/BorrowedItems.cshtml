@@ -1,6 +1,45 @@
-﻿
+﻿@model IEnumerable<Mi_Share.ViewModels.LoanViewModel>
+
 @{
-    ViewBag.Title = "BorrowedItems";
+    ViewBag.Title = "Borrowed Items";
 }
 
-<!-- Add pagedesign code below-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">&nbsp;</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered datatable table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item no</th>
+                            <th>Item Name</th>
+                            <th>Item Type</th>
+                            <th>Owner</th>
+                            <th>Date Borrowed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int i = 1;}
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@(i++)</td>
+                                <td>@item.Request.Item.Name</td>
+                                <td>@item.Request.Item.Category.Name</td>
+                                <td>@item.Request.Item.Owner.FullName</td>
+                                <td>@item.BeginDate.ToShortDateString()</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>

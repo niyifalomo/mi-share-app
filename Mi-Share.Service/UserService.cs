@@ -67,9 +67,9 @@ namespace Mi_Share.Service
             var users = _userRepository.GetMany(x=>x.ID != currentUserID)
 
                .GroupJoin(
-                   _collectionAccessRepository.GetMany(x => x.Requester_ID == currentUserID && x.Status == CollectionAccessStatus.Granted),
+                   _collectionAccessRepository.GetMany(x => x.Requester_ID == currentUserID),
                    i => i.ID,
-                   p => p.Requester_ID,
+                   p => p.Owner_ID,
                    (i, g) =>
                        new
                        {

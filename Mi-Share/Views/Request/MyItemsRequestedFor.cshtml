@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Mi_Share.ViewModels.RequestViewModel>
+<div class="box box-info">
+    <div class="box-header with-border">
+        <span class="label label-success pull-left">@Model.Count()</span>
+        <h3 class="box-title">Items Requests</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="table no-margin">
+                <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Item Name</th>
+                        <th>Item Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Requester</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 1;}
+                    @foreach (var item in Model)
+                    {
+                        string StyleClass = "label-info";
+
+                        if (item.Status.ToString().ToLower() == "pending")
+                        {
+                            StyleClass = "label-warning";
+                        }
+                        if (item.Status.ToString().ToLower() == "denied")
+                        {
+                            StyleClass = "label-danger";
+                        }
+                        <tr>
+                            <td>@(i++)</td>
+                            <td>@item.Item.Name</td>
+                            <td>@item.Item.Category.Name</td>
+                            <td>@item.DateCreated.ToLongDateString()</td>
+                            <td><span class="label @StyleClass">@item.Status.ToString()</span></td>
+                            <td><a href="#">@item.Requester.FullName</a></td>
+                            <td>
+                                @if (item.Status.ToString().ToLower() != "granted")
+                                {
+                                <button type="button" data-id="@item.ID" class="btn btn-xs  btn-success GrantBorrowRequest">grant</button>
+                                <button type="button" data-id="@item.ID" class="btn btn-xs  btn-danger DenyBorrowRequest">deny</button>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                 
+                </tbody>
+            </table>
+        </div>
+        <!-- /.table-responsive -->
+    </div>
+    <!-- /.box-body -->
+</div>

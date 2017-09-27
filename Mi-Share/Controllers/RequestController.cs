@@ -86,6 +86,7 @@ namespace Mi_Share.Controllers
 
         }
 
+        //Grant Access to view librarry
         [HttpPost]
         public ActionResult GrantCollectionAccessRequest(int collectionId)
         {
@@ -130,6 +131,9 @@ namespace Mi_Share.Controllers
 
         }
 
+
+        //Deny Item borrow request
+
         [HttpPost]
         public ActionResult DenyBorrowRequest(int requestId)
         {
@@ -143,6 +147,9 @@ namespace Mi_Share.Controllers
 
         }
 
+
+        //Deny access to view library
+
         [HttpPost]
         public ActionResult DenyCollectionAccessRequest(int collectionId)
         {
@@ -154,7 +161,7 @@ namespace Mi_Share.Controllers
 
         }
 
-
+        //Stop pending request to view collection
         [HttpPost]
         public ActionResult CancelCollectionAccessRequest(int collectionId)
         {
@@ -167,6 +174,7 @@ namespace Mi_Share.Controllers
             
         }
 
+        //Stop pending request to borrow item
         [HttpPost]
         public ActionResult CancelSentItemRequest(int requestId)
         {
@@ -178,6 +186,7 @@ namespace Mi_Share.Controllers
 
         }
 
+        //Show Sent item borrow requests
         public PartialViewResult PendingItemsRequestedFor()
         {
             int userID = GetUserID();
@@ -189,6 +198,8 @@ namespace Mi_Share.Controllers
 
 
         }
+
+        //Show Sent Library Access requests
         public PartialViewResult PendingLibrariesRequestedFor()
         {
 
@@ -202,6 +213,7 @@ namespace Mi_Share.Controllers
         }
 
 
+        //Show items requests received
 
         public PartialViewResult MyItemsRequestedFor()
         {
@@ -213,6 +225,8 @@ namespace Mi_Share.Controllers
 
             return PartialView(viewModelItem);
         }
+
+        //Show library access requests received
         public PartialViewResult MyLibraryRequests()
         {
 
@@ -224,6 +238,8 @@ namespace Mi_Share.Controllers
 
             return PartialView(viewModelItem);
         }
+
+        //Get currently logged in user
 
         public int GetUserID()
         {

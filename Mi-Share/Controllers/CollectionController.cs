@@ -31,6 +31,8 @@ namespace Mi_Share.Controllers
             
            return RedirectToAction("MyCollection");
         }
+
+        //View Items in logged in user's collection
         public ActionResult MyCollection()
         {
             var itemViewModel = new ItemViewModel();
@@ -45,6 +47,7 @@ namespace Mi_Share.Controllers
 
         }
 
+        //View other users' libraries
         public ActionResult OthersCollection()
         {
             int userid = GetUserID();
@@ -57,6 +60,8 @@ namespace Mi_Share.Controllers
 
         }
 
+
+        //View other user's collection/library
         public ActionResult ViewOthersCollection(int userId)
         {
             ViewBag.UserName = _userService.GetUserByID(userId).FullName;
@@ -67,6 +72,7 @@ namespace Mi_Share.Controllers
         }
 
 
+        //Returns list of items in collection
         public PartialViewResult ItemList()
         {
             int userID = GetUserID();
@@ -76,6 +82,8 @@ namespace Mi_Share.Controllers
 
             return PartialView(viewModelItem);
         }
+
+        //Update an item
         public PartialViewResult EditItem(int id)
         {
             var item = _itemService.GetItemByID(id);
@@ -89,6 +97,8 @@ namespace Mi_Share.Controllers
            
             return PartialView(itemViewModel);
         }
+
+        //Add a new Item to library
 
         [HttpPost]
         public ActionResult CreateItem(ItemViewModel viewModel)

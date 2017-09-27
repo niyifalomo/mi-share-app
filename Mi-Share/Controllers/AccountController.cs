@@ -32,6 +32,8 @@ namespace Mi_Share.Controllers
             return View("Login");
         }
 
+
+        //Login
         [HttpPost]
         public ActionResult Login(string username, string password)
         {

@@ -34,6 +34,8 @@ namespace Mi_Share.Controllers
             
             return View();
         }
+
+        //return loaned items list
         public PartialViewResult LoanedItemsList()
         {
             int userID = GetUserID();
@@ -45,6 +47,8 @@ namespace Mi_Share.Controllers
             return PartialView(viewModelItem);
 
         }
+
+        //returns borrowed items list
         public ActionResult BorrowedItems()
         {
             int userID = GetUserID();
@@ -56,6 +60,8 @@ namespace Mi_Share.Controllers
             return View(viewModelItem);
         }
 
+
+        //Mark borrowed item has returned
         [HttpPost]
         public ActionResult ReturnLoanedItem(int loanId)
         {
@@ -73,7 +79,7 @@ namespace Mi_Share.Controllers
             return Json("Failure");
         }
 
-
+        //Get currently logged-in user ID
         public int GetUserID()
         {
             var identity = (ClaimsIdentity)User.Identity;

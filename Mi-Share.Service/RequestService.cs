@@ -46,6 +46,7 @@ namespace Mi_Share.Service
             _unitOfWork = unitOfWork;
         }
 
+        //Create an item borrow request
         public bool AddItemBorrowRequest(Request request)
         {
             request.Status = RequestStatus.Pending;
@@ -55,6 +56,8 @@ namespace Mi_Share.Service
 
             return SaveRequest() > 0 ? true : false;
         }
+
+        //Add request to view collection/library
         public bool AddCollectionRequest(CollectionAccess request)
         {
             request.Status = CollectionAccessStatus.Pending;
@@ -84,19 +87,14 @@ namespace Mi_Share.Service
 
         }
 
+        //update item borrow request status -- granted or denied
         public bool UpdateItemRequest(Request request, bool grant)
         {
             
             request.Status = (grant) ? RequestStatus.Granted : RequestStatus.Denied;
             request.Updated_At = DateTime.Now;
             _requestRepository.Update(request);
-
-            if (grant)
-            {
-                
-            }
-
-
+            
             return SaveRequest() > 0 ? true : false;
 
         }
@@ -107,6 +105,7 @@ namespace Mi_Share.Service
 
         }
 
+        //Get received requests to access library
         public IEnumerable<CollectionAccess> MyLibraryRequests(int userID)
         {
             var requests = _collectionAccessRepository.GetMany(x => x.Owner_ID == userID);
@@ -114,25 +113,29 @@ namespace Mi_Share.Service
 
         }
 
-
+        //Get sent requests to access library
         public IEnumerable<CollectionAccess> PendingLibrariesRequestedFor(int UserID)
         {
             var requests = _collectionAccessRepository.GetMany(x => x.Requester_ID == UserID);
             return requests;
         }
 
+        // Get all seent borrow requests
         public IEnumerable<Request> PendingItemsRequestedFor(int UserID)
         {
             var requests = _requestRepository.GetMany(x => x.Requester_ID == UserID);
             return requests;
         }
 
+        
         public CollectionAccess GetCollectionRequest(int id)
         {
             var request = _collectionAccessRepository.Get(x => x.ID == id);
             return request;
 
         }
+
+        //stop/cancel a sent request
 
         public bool DeleteCollectionRequest(CollectionAccess request)
         {

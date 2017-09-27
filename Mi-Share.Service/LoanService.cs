@@ -31,18 +31,23 @@ namespace Mi_Share.Service
             _unitOfWork = unitOfWork;
         }
 
+
+        //Get all items borrowed by user
         public IEnumerable<Loan> GetBorrowedItems(int UserID)
         {
             var items = _loanRepository.GetMany(x => x.Request.Requester_ID == UserID);
             return items;
         }
 
+
+        //Get all loaned items
         public IEnumerable<Loan> GetLendedItems(int UserID)
         {
             var items = _loanRepository.GetMany(x => x.Request.Item.Owner_ID == UserID);
             return items;
         }
 
+        //Update loan status--Returned/Still on loan
         public bool ChangeLoanStatus(Loan loan, bool returned)
         {
             loan.Status = returned ? LoanStatus.Returned : LoanStatus.OnLoan;
@@ -55,6 +60,8 @@ namespace Mi_Share.Service
             var item = _loanRepository.GetById(id);
             return item;
         }
+
+        //Create an item borrow request--Granted
         public bool AddLoan(Loan loan)
         {
             loan.Status = LoanStatus.OnLoan;

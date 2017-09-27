@@ -43,6 +43,7 @@ namespace Mi_Share.Service
 
         }
 
+        //Get User using credentials
         public User GetUserByCredentials(string username, string password)
         {
             var user = _userRepository.Get(x => x.UserName.ToLower() == username.ToLower() && x.Password == password);
@@ -62,6 +63,8 @@ namespace Mi_Share.Service
             return users;
         }
 
+
+        //Get Other users libraries  ----Username, items and access status
         public IEnumerable<UsersCollections> GetCollectionsList(int currentUserID)
         {
             var users = _userRepository.GetMany(x=>x.ID != currentUserID)

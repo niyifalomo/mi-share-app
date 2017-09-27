@@ -47,12 +47,7 @@ namespace Mi_Share.Controllers
 
         public ActionResult OthersCollection()
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-
-            var userID = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
-
-            int userid = Convert.ToInt32(userID);
+            int userid = GetUserID();
 
             IEnumerable<UsersCollections> users = _userService.GetCollectionsList(userid);
 
@@ -98,12 +93,9 @@ namespace Mi_Share.Controllers
         [HttpPost]
         public ActionResult CreateItem(ItemViewModel viewModel)
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
+            int userID = GetUserID();
 
-            var userID = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
-
-            viewModel.Owner = _userService.GetUserByID(Convert.ToInt32(userID));
+            viewModel.Owner = _userService.GetUserByID(userID);
 
             viewModel.Category = _categoryService.GetCategoryById(viewModel.Category.ID);
 

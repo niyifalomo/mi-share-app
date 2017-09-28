@@ -1,10 +1,10 @@
-# mi-share-app
+# MI-SHARE
 
-# Digial media library
+### Digial media library
 
  -- Borrow Items, Manage items in collection, Manage requests.
  
-## Getting Started
+### Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. .
 

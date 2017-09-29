@@ -1,6 +1,6 @@
 # MI-SHARE
 
-### Digial media library
+### Digital media library
 
  -- Borrow Items, Manage items in collection, Manage requests.
  
